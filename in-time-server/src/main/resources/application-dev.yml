@@ -1,0 +1,12 @@
+intime:
+  datasource:
+    #驱动类名称
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    #数据库名称
+    database: in_time_take_out
+    #连接数据库的用户名
+    username: root
+    #连接数据库的密码
+    password: root

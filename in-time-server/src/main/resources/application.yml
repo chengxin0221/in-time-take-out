@@ -1,0 +1,62 @@
+server:
+  port: 8080
+
+#设置启用的环境
+spring:
+  profiles:
+    active: dev #表示使用的是开发环境的配置
+  main:
+    allow-circular-references: true
+  datasource:
+      driver-class-name: ${intime.datasource.driver-class-name}
+      url: jdbc:mysql://${intime.datasource.host}:${intime.datasource.port}/${intime.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${intime.datasource.username}
+      password: ${intime.datasource.password}
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.intime.entity
+  configuration:
+    #指定mybatis输出日志的位置，输出控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #开启mybatis的驼峰命名自动映射开关
+    map-underscore-to-camel-case: true
+
+#spring事务管理日志
+logging:
+  level:
+    com:
+      intime:
+        mapper: debug
+        service: info
+        controller: info
+
+intime:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: intime
+    # 设置jwt过期时间 单位毫秒  7200000毫秒 = 2小时
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  #用于 Json 格式的 OpenAPI 文档的自定义路径。
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: '开发环境'
+      paths-to-match: '/**'
+      #要扫描的包列表（逗号分隔）
+      packages-to-scan: com.intime.controller
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
