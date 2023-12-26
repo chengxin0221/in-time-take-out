@@ -1,6 +1,7 @@
 package com.intime.interceptor;
 
 import com.intime.constan.JwtClaimsConstant;
+import com.intime.context.BaseContext;
 import com.intime.properties.JwtProperties;
 import com.intime.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -23,7 +24,6 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
 
     /**
      * 校验jwt
-     *
      * @param request
      * @param response
      * @param handler
@@ -45,6 +45,8 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
             log.info("jwt校验:{}", token);
             Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
             Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
+            //把登录用户的id保存到当前线程的线程局部变量
+            BaseContext.setCurrentId(empId);
             log.info("当前员工id：", empId);
             //3、通过，放行
             return true;

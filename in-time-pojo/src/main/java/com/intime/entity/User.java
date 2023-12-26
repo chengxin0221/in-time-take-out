@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class user implements Serializable {
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;

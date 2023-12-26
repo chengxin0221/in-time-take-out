@@ -1,7 +1,10 @@
 package com.intime.service.impl;
 
 import com.intime.constan.MessageConstant;
+import com.intime.constan.PasswordConstant;
 import com.intime.constan.StatusConstant;
+import com.intime.context.BaseContext;
+import com.intime.dto.EmployeeDTO;
 import com.intime.entity.Employee;
 import com.intime.dto.EmployeeLoginDTO;
 import com.intime.exception.AccountLockedException;
@@ -9,9 +12,12 @@ import com.intime.exception.AccountNotFoundException;
 import com.intime.exception.PasswordErrorException;
 import com.intime.mapper.EmployeeMapper;
 import com.intime.service.EmployeeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import java.time.LocalDateTime;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -54,5 +60,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //3、返回实体对象
         return employee;
+    }
+
+    /**
+     * 新增员工
+     * @param employeeDTO
+     */
+    @Override
+    public void addUser(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        //属性拷贝
+        BeanUtils.copyProperties(employeeDTO,employee);
+        //账号状态默认为1  1正常 0锁定
+        employee.setStatus(StatusConstant.ENABLE);
+        //默认密码为123456   进行md5加密
+        employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
+        //创建人、创建时间、修改人、修改时间
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+        //获取当前线程所对应的线程局部变量中保存的用户id
+        employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.insert(employee);
     }
 }

@@ -1,6 +1,7 @@
 package com.intime.controller.admin;
 
 import com.intime.constan.JwtClaimsConstant;
+import com.intime.dto.EmployeeDTO;
 import com.intime.dto.EmployeeLoginDTO;
 import com.intime.entity.Employee;
 import com.intime.properties.JwtProperties;
@@ -65,9 +66,23 @@ public class EmployeeController {
     }
 
     /**
+     * 新增员工
+     * @param employeeDTO
+     * @return
+     */
+    @Operation(summary = "新增员工")
+    @PostMapping
+    public Result addUser(@RequestBody EmployeeDTO employeeDTO){
+        log.info("新增员工：{}",employeeDTO);
+        employeeService.addUser(employeeDTO);
+        return Result.success();
+    }
+
+    /**
      * 退出
      * @return
      */
+    @Operation(summary = "退出")
     @PostMapping("/logout")
     public Result<String> logout() {
         return Result.success();
