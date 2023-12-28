@@ -6,8 +6,11 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@Schema(description = "新增员工时传递的数据模型")
+@Schema(description = "新增和修改员工时传递的数据模型")
 public class EmployeeDTO implements Serializable {
+    //id
+    @Schema(description = "id")
+    private Long id;
     //用户名
     @Schema(description = "用户名")
     private String username;

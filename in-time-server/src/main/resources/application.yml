@@ -55,6 +55,8 @@ springdoc:
       paths-to-match: '/**'
       #要扫描的包列表（逗号分隔）
       packages-to-scan: com.intime.controller
+  #使get请求对象解析成form参数
+  default-flat-param-object: true
 # knife4j的增强配置，不需要增强可以不配
 knife4j:
   enable: true

@@ -39,14 +39,6 @@
     <knife4j.version>4.3.0</knife4j.version>
   </properties>
 
-  <dependencies>
-    <!--控制台输出日志的工具-->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-  </dependencies>
-
   <dependencyManagement>
     <dependencies>
       <!--mybatis的起步依赖-->
