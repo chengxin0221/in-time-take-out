@@ -12,6 +12,7 @@ import com.intime.service.EmployeeService;
 import com.intime.utils.JwtUtil;
 import com.intime.vo.EmployeeLoginVO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
@@ -85,7 +86,7 @@ public class EmployeeController {
      */
     @Operation(summary = "员工分页查询")
     @GetMapping("/page")
-    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
+    public Result<PageResult> pageQuery(EmployeePageQueryDTO employeePageQueryDTO){
         log.info("分页查询：{}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
@@ -99,6 +100,8 @@ public class EmployeeController {
      */
     @Operation(summary = "启用或禁用员工账号")
     @PostMapping("/status/{status}")
+    @Parameter(name = "status", description = "账号状态 0 标识禁用 1 表示启用")
+    @Parameter(name = "id", description = "id")
     public Result<String> startOrStop(@PathVariable Integer status, Long id){
         log.info("启用或禁用员工账号：{}，{}",status,id);
         employeeService.startOrStop(status, id);
