@@ -1,8 +1,10 @@
 package com.intime.mapper;
 
 import com.github.pagehelper.Page;
+import com.intime.annotation.AutoFill;
 import com.intime.dto.EmployeePageQueryDTO;
 import com.intime.entity.Employee;
+import com.intime.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -25,6 +27,7 @@ public interface EmployeeMapper {
             "(name, username, password, phone, sex, id_number, status, create_time, update_time, create_user, update_user) " +
             "VALUES " +
             "(#{name}, #{username}, #{password}, #{phone}, #{sex}, #{idNumber}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
+    @AutoFill(OperationType.INSERT) //自动填充创建人、创建时间、修改人、修改时间
     void insert(Employee employee);
 
     /**
@@ -38,6 +41,7 @@ public interface EmployeeMapper {
      * 根据id修改员工信息
      * @param employee
      */
+    @AutoFill(OperationType.UPDATE) //自动填充修改人、修改时间
     void update(Employee employee);
 
     /**

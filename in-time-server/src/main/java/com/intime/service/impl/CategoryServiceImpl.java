@@ -40,12 +40,9 @@ public class CategoryServiceImpl implements CategoryService {
         BeanUtils.copyProperties(categoryDTO,category);
         //分类状态 0 标识禁用 1 表示启用
         category.setStatus(StatusConstant.DISABLE);
-        //创建人、创建时间、修改人、修改时间
-        category.setCreateTime(LocalDateTime.now());
-        category.setUpdateTime(LocalDateTime.now());
-        //获取当前线程所对应的线程局部变量中保存的用户id
-        category.setCreateUser(BaseContext.getCurrentId());
-        category.setUpdateUser(BaseContext.getCurrentId());
+
+        /*在Mapper类中用@AutoFill注解通过AOP方式自动填充创建人、创建时间、修改人、修改时间*/
+
         categoryMapper.insert(category);
     }
 
@@ -92,10 +89,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void update(CategoryDTO categoryDTO) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDTO, category);
-        //修改时间、修改人id
-        category.setUpdateTime(LocalDateTime.now());
-        //获取当前线程所对应的线程局部变量中保存的用户id
-        category.setUpdateUser(BaseContext.getCurrentId());
+
+        /*在Mapper类中用@AutoFill注解通过AOP方式自动填充修改人、修改时间*/
+
         categoryMapper.update(category);
     }
 
