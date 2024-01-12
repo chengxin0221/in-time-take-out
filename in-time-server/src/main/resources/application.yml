@@ -7,11 +7,18 @@ spring:
     active: dev #表示使用的是开发环境的配置
   main:
     allow-circular-references: true
+  #数据库
   datasource:
       driver-class-name: ${intime.datasource.driver-class-name}
       url: jdbc:mysql://${intime.datasource.host}:${intime.datasource.port}/${intime.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${intime.datasource.username}
       password: ${intime.datasource.password}
+  servlet:
+    multipart:
+      #配置单个文件最大上传大小
+      max-file-size: 10MB
+      #配置单个请求最大上传大小(一次请求可以上传多个文件)
+      max-request-size: 100MB
 
 mybatis:
   #mapper配置文件
@@ -40,6 +47,14 @@ intime:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+  qiniu:
+    access-key: ${intime.qiniu.access-key}
+    secret-key: ${intime.qiniu.secret-key}
+    # 存储空间名称
+    bucket: ${intime.qiniu.bucket}
+    zone: ${intime.qiniu.zone}
+    # 外链默认域名，该空间的默认域名
+    domain-of-bucket: ${intime.qiniu.domain-of-bucket}
 
 # springdoc-openapi项目配置
 springdoc:

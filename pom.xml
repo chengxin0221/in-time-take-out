@@ -30,13 +30,11 @@
     <spring.boot.autoconfigure.version>3.1.0</spring.boot.autoconfigure.version>
     <jjwt.version>0.9.1</jjwt.version>
     <fastJSON.version>1.2.76</fastJSON.version>
-    <aliyun.oss.version>3.15.1</aliyun.oss.version>
     <jaxb.version>2.3.1</jaxb.version>
-    <activation.version>1.1.1</activation.version>
-    <jaxb.runtime.version>2.3.3</jaxb.runtime.version>
     <pagehelper.version>1.4.6</pagehelper.version>
     <aop.version>3.1.4</aop.version>
     <knife4j.version>4.3.0</knife4j.version>
+    <qiniu.version>7.13.0</qiniu.version>
   </properties>
 
   <dependencyManagement>
@@ -71,31 +69,13 @@
         <artifactId>fastjson</artifactId>
         <version>${fastJSON.version}</version>
       </dependency>
-      <!--    === 以下 阿里云oss相关 ====    -->
-      <!--在Maven工程中使用阿里云OSS Java SDK-->
-      <dependency>
-        <groupId>com.aliyun.oss</groupId>
-        <artifactId>aliyun-sdk-oss</artifactId>
-        <version>${aliyun.oss.version}</version>
-      </dependency>
+      <!-- 生成jwt时没有加以下依赖会报错：java.lang.ClassNotFoundException: javax.xml.bind.DatatypeConverter -->
       <!--使用的是Java 9及以上的版本，则需要添加jaxb相关依赖-->
       <dependency>
         <groupId>javax.xml.bind</groupId>
         <artifactId>jaxb-api</artifactId>
         <version>${jaxb.version}</version>
       </dependency>
-      <dependency>
-        <groupId>javax.activation</groupId>
-        <artifactId>activation</artifactId>
-        <version>${activation.version}</version>
-      </dependency>
-      <!-- no more than 2.3.3-->
-      <dependency>
-        <groupId>org.glassfish.jaxb</groupId>
-        <artifactId>jaxb-runtime</artifactId>
-        <version>${jaxb.runtime.version}</version>
-      </dependency>
-      <!--    === 以上 阿里云oss相关 ====    -->
       <!--PageHelper分页插件-->
       <dependency>
         <groupId>com.github.pagehelper</groupId>
@@ -113,6 +93,12 @@
         <groupId>com.github.xiaoymin</groupId>
         <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
         <version>${knife4j.version}</version>
+      </dependency>
+      <!--七牛云对象存储-->
+      <dependency>
+        <groupId>com.qiniu</groupId>
+        <artifactId>qiniu-java-sdk</artifactId>
+        <version>${qiniu.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
