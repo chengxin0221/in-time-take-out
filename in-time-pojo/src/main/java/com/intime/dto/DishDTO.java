@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Schema(description = "新增、删除、修改菜品时传递的参数")
 public class DishDTO implements Serializable {
     //菜品id
     @Schema(description = "菜品id")

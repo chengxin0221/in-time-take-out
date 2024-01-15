@@ -2,6 +2,7 @@ package com.intime.service;
 
 import com.intime.dto.DishDTO;
 import com.intime.dto.DishPageQueryDTO;
+import com.intime.entity.Dish;
 import com.intime.result.PageResult;
 import com.intime.vo.DishVO;
 
@@ -40,4 +41,11 @@ public interface DishService {
      * @param dishDTO
      */
     void updateWithFlavor(DishDTO dishDTO);
+
+    /**
+     * 根据分类id查询菜品信息
+     * @param categoryId
+     * @return
+     */
+    List<Dish> list(Long categoryId);
 }

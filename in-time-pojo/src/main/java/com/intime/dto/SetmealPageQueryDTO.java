@@ -3,11 +3,9 @@ package com.intime.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
 @Schema(description = "分页查询时传递的数据模型")
-public class DishPageQueryDTO implements Serializable {
+public class SetmealPageQueryDTO {
     //页码
     @Schema(description = "页码")
     private int page;
@@ -16,15 +14,15 @@ public class DishPageQueryDTO implements Serializable {
     @Schema(description = "每页记录数")
     private int pageSize;
 
-    //菜品名称
-    @Schema(description = "菜品名称")
-    private String name;
-
     //分类id
     @Schema(description = "分类id")
     private Integer categoryId;
 
-    //状态 0表示禁用 1表示启用
-    @Schema(description = "状态 0表示禁用 1表示启用")
+    //套餐名称
+    @Schema(description = "套餐名称")
+    private String name;
+
+    //套餐起售状态 0:停用 1:启用
+    @Schema(description = "套餐起售状态 0:停用 1:启用")
     private Integer status;
 }
