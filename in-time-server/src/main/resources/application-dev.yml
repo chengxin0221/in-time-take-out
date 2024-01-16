@@ -10,3 +10,21 @@ intime:
     username: root
     #连接数据库的密码
     password: root
+
+  qiniu:
+    access-key: lhDqx-2BEQSIKwy2wy0McYAQGZAcokm7CyKPn5qH
+    secret-key: 7BV4NwM8a8y_j_uKfBkTZfCBEK4VZg3TBGQ3mJsP
+    # 存储空间名称
+    bucket: in-time-take-out
+    # [{'zone0':'华东'}, {'zone1':'华北'},{'zone2':'华南'},{'zoneNa0':'北美'},{'zoneAs0':''}]
+    zone: zone2
+    # 外链默认域名，该空间的默认域名
+    domain-of-bucket: http://s6qlu9jlt.hn-bkt.clouddn.com/
+
+  redis:
+    host: localhost
+    port: 6379
+    password: root
+    database: 10
+
+
